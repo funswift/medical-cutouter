@@ -4,8 +4,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 class Cutouter:
-    def __init__(self, filename):
-        self.image = Image.open(filename)
+    def __init__(self, image_bin):
+        self.image = Image.open(image_bin)
 
 
     def get_contours(self):
@@ -25,10 +25,13 @@ class Cutouter:
 
  
     def crop_image(self, large_contours):
+        images = []
         for contour in large_contours:
-            crop_area = cv2.boundingRect(contour)        
+            x, y, w, h = cv2.boundingRect(contour)
+            crop_area = (x, y, x+w, y+h)
             crop_image = self.image.crop(crop_area)
-            print(crop_image)
+            images.append(crop_image)
+        return images
 
 
     def main(self):
