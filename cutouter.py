@@ -1,7 +1,6 @@
 from PIL import Image
-import cv2, matplotlib
+import cv2
 import numpy as np
-import matplotlib.pyplot as plt
 
 class Cutouter:
     def __init__(self, image_bin):
