@@ -5,9 +5,13 @@ from flask import Flask, request
 from cutouter import Cutouter
 from docomo import ImageRecognition
 
+KEY = os.environ.get("CUTOUTER_KEY")
 ALLOWED_EXTENSIONS = set(["jpg", "jpeg", "png"])
 
 app = Flask(__name__)
+
+def valid_key(key):
+    return key == KEY
 
 def allowed_file(filename):
     return "." in filename and \
@@ -19,6 +23,8 @@ def index():
 
 @app.route("/", methods=["POST"])
 def upload_file():
+    if not valid_key(request.form["key"]):
+        return "Invalid key..."
     if "file" not in request.files:
         return "No file part..."
     file = request.files["file"]
