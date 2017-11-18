@@ -3,6 +3,7 @@ from io import BytesIO
 from flask import Flask, request
 
 from cutouter import Cutouter
+from docomo import ImageRecognition
 
 ALLOWED_EXTENSIONS = set(["jpg", "jpeg", "png"])
 
@@ -26,7 +27,8 @@ def upload_file():
         return "No selected file..."
     if file and allowed_file(file.filename):
         image_bin = BytesIO(file.read())
-        Cutouter(image_bin).main()
+        images = Cutouter(image_bin).main()
+        ImageRecognition(images).main()
         return "Success!"
 
 

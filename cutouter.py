@@ -35,4 +35,4 @@ class Cutouter:
 
     def main(self):
         contours = self.get_contours()
-        self.crop_image(contours)
+        return self.crop_image(contours)
