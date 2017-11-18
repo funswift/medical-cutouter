@@ -1,6 +1,7 @@
 import os
 from io import BytesIO
 import requests
+import json
 
 APIKEY = os.environ.get("DOCOMO_APIKEY")
 
@@ -10,6 +11,7 @@ class ImageRecognition:
 
 
     def main(self):
+        res = []
         for image in self.images:
             jpg_img = BytesIO()
             image.save(jpg_img, format="PNG")
@@ -21,4 +23,6 @@ class ImageRecognition:
                 "image": jpg_img.getvalue(),
             }
             r = requests.post(url, data=data, files=files)
-            print(r.text)
+            res.append(json.loads(r.text))
+
+        return res

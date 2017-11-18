@@ -1,6 +1,6 @@
 import os
 from io import BytesIO
-from flask import Flask, request
+from flask import Flask, request, jsonify
 
 from cutouter import Cutouter
 from docomo import ImageRecognition
@@ -34,8 +34,8 @@ def upload_file():
     if file and allowed_file(file.filename):
         image_bin = BytesIO(file.read())
         images = Cutouter(image_bin).main()
-        ImageRecognition(images).main()
-        return "Success!"
+        res =  ImageRecognition(images).main()
+        return jsonify(res)
 
 
 if __name__ == '__main__':
