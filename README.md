@@ -13,7 +13,7 @@
 `python app.py`でサーバーが起動する。
 httpでルート直下に画像(jpg/jpeg/png)をポストすると、皿ごとの認識結果がjsonで返ってくる。
 
-例) `curl -F file=@test.jpg` http://localhost:5000
+例) `curl -F file=@test.jpg -F key=cutouterkey http://localhost:5000`
 
 レスポンス
 ```
